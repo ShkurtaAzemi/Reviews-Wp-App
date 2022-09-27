@@ -103,7 +103,7 @@ class Reviews
         <?php
     }
 
-//show input field for the review label
+    //show input field for the review label
     function reviewLabel()
     {
         ?>
@@ -112,7 +112,7 @@ class Reviews
         <?php
     }
 
-//show the Color Picker field
+    //show the Color Picker field
     function thBgColor()
     {
         ?>
@@ -125,7 +125,6 @@ class Reviews
     function adminPage()
     {
         add_options_page('Toplist Reviews App Labels', 'Toplist Reviews App', 'manage_options', 'toplist-reviews-page', array($this, 'ourHtml'));
-
     }
 
     //render settings fields HTML
@@ -153,7 +152,7 @@ class Reviews
         <?php
     }
 
-    //include css and js assets
+    //enqueue js scripts and styles
     function pluginAssets()
     {
         wp_enqueue_style('bootstrap-file', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css');
@@ -162,8 +161,7 @@ class Reviews
 
     }
 
-    //include wordpress colorpicker scripts
-
+    //include wp-color-picker jquery script and style
     function pluginSettingPageColorPicker()
     {
         wp_enqueue_style('wp-color-picker');
@@ -174,7 +172,6 @@ class Reviews
     function showReviewsHtml($content)
     {
         return generateReviewsHTML();
-
     }
 
 }

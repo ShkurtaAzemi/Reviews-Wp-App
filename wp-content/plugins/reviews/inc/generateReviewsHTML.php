@@ -1,6 +1,5 @@
 <?php
 
-
 function generateReviewsHTML()
 {
     //Get labels from settings page
@@ -109,7 +108,7 @@ function generateReviewsHTML()
                                                 </defs>
                                             </svg>
                                             <p class="c-rate">
-                                                <!--                                                dynamic genration of svg star icons based on rating-->
+                                                <!--dynamic generation of svg star icons based on rating-->
                                                 <?php for ($i = 0; $i <= 5; $i++): ?>
                                                     <svg class="c-icon <?php echo $i <= $rating ? 'active' : '' ?>"
                                                          width="32" height="32">
