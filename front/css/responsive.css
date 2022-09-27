@@ -27,8 +27,8 @@
                 to left,
                 #ffffff 0%,
                 #ffffff 60%,
-                #d29f36 40%,
-                #d29f36 100%
+                var(--th-bg-color) 40%,
+                var(--th-bg-color) 100%
         );
         border: none;
         border-bottom: 1px solid #eee;

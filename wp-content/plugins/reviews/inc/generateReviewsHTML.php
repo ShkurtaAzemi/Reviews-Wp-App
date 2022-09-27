@@ -44,7 +44,6 @@ function generateReviewsHTML()
         echo 'Message: ' . $e->getMessage();
     }
 
-
     //generate the HTML section for the table
     if (!empty($our_toplists)):
         ob_start(); ?>
@@ -78,7 +77,7 @@ function generateReviewsHTML()
 
                             ?>
                             <tr class="table-row">
-                                <td data-title="Casino">
+                                <td data-title="Casino" style="--th-bg-color:<?php echo esc_attr($th_bg_color) ?>">
                                     <div class="cell-row-content casino-row">
                                         <?php if ($logo_url): ?>
                                             <a href="<?php echo esc_url($review_url) ?: '#' ?>">
@@ -91,7 +90,7 @@ function generateReviewsHTML()
                                         <?php endif; ?>
                                     </div>
                                 </td>
-                                <td data-title="Bonus">
+                                <td data-title="Bonus" style="--th-bg-color:<?php echo esc_attr($th_bg_color) ?>">
                                     <div class=" cell-row-content star-rating">
                                         <?php if ($rating): ?>
                                             <svg style="width: 0; height: 0;display: none"
@@ -124,7 +123,7 @@ function generateReviewsHTML()
                                         <?php endif; ?>
                                     </div>
                                 </td>
-                                <td data-title="Features">
+                                <td data-title="Features" style="--th-bg-color:<?php echo esc_attr($th_bg_color) ?>">
                                     <div class="cell-row-content features-row">
                                         <?php if (!empty($features_array)): ?>
                                             <ul>
@@ -135,7 +134,7 @@ function generateReviewsHTML()
                                         <?php endif; ?>
                                     </div>
                                 </td>
-                                <td data-title="Play">
+                                <td data-title="Play" style="--th-bg-color:<?php echo esc_attr($th_bg_color) ?>">
                                     <div class="cell-row-content play-row">
                                         <?php if ($play_url): ?>
                                             <a href="<?php echo esc_url($play_url) ?>">
