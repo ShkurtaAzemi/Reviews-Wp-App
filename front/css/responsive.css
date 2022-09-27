@@ -62,7 +62,7 @@
     .table-row {
         padding: 0;
     }
-    
+
     .table-row .cell-row-content ul {
         width: fit-content;
         margin: auto;
@@ -70,6 +70,7 @@
 
     .table-row .cell-row-content ul li {
         word-wrap: break-word;
+        width: auto;
     }
 
     .table-row .cell-row-content.casino-row img {

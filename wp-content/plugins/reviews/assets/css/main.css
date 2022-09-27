@@ -5,6 +5,9 @@
     font-family: 'Open Sans', sans-serif;
     font-style: normal;
 }
+h2{
+    font-size: 25px;
+}
 
 .table-container {
     box-shadow: 1px 8px 20px 0px rgb(0 0 0 / 65%);
@@ -21,7 +24,8 @@
 }
 
 .table-cell {
-    background: #d29f36;
+    /*background: #d29f36;*/
+    background:var(--th-bg-color);
     color: white;
     border-color: #1565C0;
 }
@@ -66,6 +70,7 @@
 .table-row .cell-row-content.casino-row img {
     display: block;
     margin: auto;
+    margin-bottom: 10px;
 }
 
 .table-row .cell-row-content.casino-row a {
@@ -100,6 +105,7 @@
 .table-row .cell-row-content ul li {
     list-style-type: none;
     position: relative;
+    width: max-content;
 }
 
 .table-row .cell-row-content ul li:before {

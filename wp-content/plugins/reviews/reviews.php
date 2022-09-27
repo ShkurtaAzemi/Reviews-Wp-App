@@ -5,6 +5,7 @@
   Description: A plugin that shows reviews on the front-page of your theme.
   Version: 1.0
   Author: Shkurte Azemi
+  Text Domain: reviews-app
 */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
@@ -16,9 +17,125 @@ class Reviews
 
     function __construct()
     {
+        add_action('admin_menu', array($this, 'adminPage'));
+        add_action('admin_init', array($this, 'settings'));
         add_action('init', array($this, 'pluginAssets'));
+        add_action('admin_enqueue_scripts', array($this, 'pluginSettingPageColorPicker'));
         add_filter('the_content', array($this, 'showReviewsHtml'), 1);
-        remove_filter('the_content','wpautop');
+        remove_filter('the_content', 'wpautop');
+    }
+
+    function settings()
+    {
+        add_settings_section('labels_first_section', 'Table Header Settings', null, 'toplist-reviews-page');
+        add_settings_section('labels_second_section', 'Other Labels', null, 'toplist-reviews-page');
+
+        add_settings_field('casino_label', 'Casino Label', array($this, 'casinoLabel'), 'toplist-reviews-page', 'labels_first_section');
+        register_setting('toplistreviewsplugin', 'casino_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+
+        add_settings_field('bonus_label', 'Bonus Label', array($this, 'bonusLabel'), 'toplist-reviews-page', 'labels_first_section');
+        register_setting('toplistreviewsplugin', 'bonus_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+
+        add_settings_field('features_label', 'Features Label', array($this, 'featuresLabel'), 'toplist-reviews-page', 'labels_first_section');
+        register_setting('toplistreviewsplugin', 'features_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+
+        add_settings_field('play_label', 'Play Label', array($this, 'playLabel'), 'toplist-reviews-page', 'labels_first_section');
+        register_setting('toplistreviewsplugin', 'play_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+
+        add_settings_field('table_header_bg_color', 'Table Header Background Color', array($this, 'thBgColor'), 'toplist-reviews-page', 'labels_first_section');
+        register_setting('toplistreviewsplugin', 'table_header_bg_color', array('sanitize_callback' => 'sanitize_text_field', 'default' => '#d29f36'));
+
+        add_settings_field('review_label', 'Review Label', array($this, 'reviewLabel'), 'toplist-reviews-page', 'labels_second_section');
+        register_setting('otherLabels', 'review_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+
+        add_settings_field('play_button_label', 'Play Button Label', array($this, 'playButtonLabel'), 'toplist-reviews-page', 'labels_second_section');
+        register_setting('otherLabels', 'play_button_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+    }
+
+    function casinoLabel()
+    {
+        ?>
+        <input type="text" name="casino_label" value="<?php echo esc_attr(get_option('casino_label')) ?>"
+               style="width:600px">
+        <?php
+    }
+
+    function bonusLabel()
+    {
+        ?>
+        <input type="text" name="bonus_label" value="<?php echo esc_attr(get_option('bonus_label')) ?>"
+               style="width:600px">
+        <?php
+    }
+
+    function featuresLabel()
+    {
+        ?>
+        <input type="text" name="features_label" value="<?php echo esc_attr(get_option('features_label')) ?>"
+               style="width:600px">
+        <?php
+    }
+
+    function playLabel()
+    {
+        ?>
+        <input type="text" name="play_label" value="<?php echo esc_attr(get_option('play_label')) ?>"
+               style="width:600px">
+        <?php
+    }
+
+    function playButtonLabel()
+    {
+        ?>
+        <input type="text" name="play_button_label" value="<?php echo esc_attr(get_option('play_button_label')) ?>"
+               style="width:600px">
+        <?php
+    }
+
+    function reviewLabel()
+    {
+        ?>
+        <input type="text" name="review_label" value="<?php echo esc_attr(get_option('review_label')) ?>"
+               style="width:600px">
+        <?php
+    }
+
+
+    function thBgColor()
+    {
+        ?>
+        <input class="my-color-field" name="table_header_bg_color" type="text"
+               value="<?php echo esc_attr(get_option('table_header_bg_color')) ?>" data-default-color="#d29f36"/>
+        <?php
+    }
+
+    function adminPage()
+    {
+        add_options_page('Toplist Reviews App Labels', 'Toplist Reviews App', 'manage_options', 'toplist-reviews-page', array($this, 'ourHtml'));
+
+    }
+
+    function ourHtml()
+    {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        ?>
+        <div class="wrap">
+            <h1> <?php _e('Plugin Settings', 'reviews-app') ?></h1>
+            <div class="tab-content">
+                <form action="options.php" method="post">
+                    <?php
+                    settings_fields('toplistreviewsplugin');
+                    settings_fields('otherLabels');
+                    do_settings_sections('toplist-reviews-page');
+                    submit_button();
+                    ?>
+                </form>
+            </div>
+        </div>
+        <?php
     }
 
     function pluginAssets()
@@ -27,6 +144,12 @@ class Reviews
         wp_enqueue_style('main-style', plugin_dir_url(__FILE__) . 'assets/css/main.css');
         wp_enqueue_style('responsive-style', plugin_dir_url(__FILE__) . 'assets/css/responsive.css');
 
+    }
+
+    function pluginSettingPageColorPicker()
+    {
+        wp_enqueue_style('wp-color-picker');
+        wp_enqueue_script('main-script', plugins_url('assets/js/main.js', __FILE__), array('wp-color-picker'), false, true);
     }
 
     function showReviewsHtml($content)

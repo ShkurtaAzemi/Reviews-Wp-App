@@ -3,6 +3,14 @@
 
 function generateReviewsHTML()
 {
+    $casino_label = get_option('casino_label');
+    $bonus_label = get_option('bonus_label');
+    $features_label = get_option('features_label');
+    $play_label = get_option('play_label');
+    $th_bg_color = get_option('table_header_bg_color');
+    $review_label = get_option('review_label');
+    $play_button_label = get_option('play_button_label');
+
     $response = wp_remote_get('https://demo0167766.mockable.io/reviews');
 
     if ((!is_wp_error($response)) && (200 === wp_remote_retrieve_response_code($response))) {
@@ -43,10 +51,10 @@ function generateReviewsHTML()
                     <table class="table table-borderless align-middle">
                         <thead>
                         <tr>
-                            <th scope="col" class="table-cell cell-header">Casino</th>
-                            <th scope="col" class="table-cell cell-header">Bonus</th>
-                            <th scope="col" class="table-cell cell-header">Features</th>
-                            <th scope="col" class="table-cell cell-header">Play</th>
+                            <th scope="col" class="table-cell cell-header" style="--th-bg-color:<?php echo esc_attr($th_bg_color)?>"><?php echo $casino_label?></th>
+                            <th scope="col" class="table-cell cell-header" style="--th-bg-color:<?php echo esc_attr($th_bg_color)?>"><?php echo $bonus_label?></th>
+                            <th scope="col" class="table-cell cell-header" style="--th-bg-color:<?php echo esc_attr($th_bg_color)?>"><?php echo $features_label?></th>
+                            <th scope="col" class="table-cell cell-header" style="--th-bg-color:<?php echo esc_attr($th_bg_color)?>"><?php echo $play_label?></th>
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -65,7 +73,7 @@ function generateReviewsHTML()
                                 <td data-title="Casino">
                                     <div class="cell-row-content casino-row">
                                         <img src="<?php echo esc_url($logo_url) ?>" alt="">
-                                        <a href="<?php echo esc_url($review_url) ?>"><?php _e('Review', 'reviews-app') ?></a>
+                                        <a href="<?php echo esc_url($review_url) ?>"><?php echo $review_label?></a>
                                     </div>
                                 </td>
                                 <td data-title="Bonus">
@@ -109,7 +117,7 @@ function generateReviewsHTML()
                                 <td data-title="Play">
                                     <div class="cell-row-content play-row">
                                         <a href="<?php echo esc_url($play_url) ?>"><span
-                                                    class="play-btn">  Play Now</span></a>
+                                                    class="play-btn"> <?php echo $play_button_label ?></span></a>
                                         <p class="terms-conditions"><?php echo $terms_and_conditions ?></p>
                                     </div>
                                 </td>
