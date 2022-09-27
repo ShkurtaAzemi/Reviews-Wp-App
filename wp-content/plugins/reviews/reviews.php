@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: Reviews
-  Description: A plugin that shows reviews on the front-page of your theme.
+  Description: A plugin that shows toplist reviews on the front-page of your theme.
   Version: 1.0
   Author: Shkurte Azemi
   Text Domain: reviews-app
@@ -17,6 +17,7 @@ class Reviews
 
     function __construct()
     {
+        //register hooks and filters that are needed for the plugin
         add_action('admin_menu', array($this, 'adminPage'));
         add_action('admin_init', array($this, 'settings'));
         add_action('init', array($this, 'pluginAssets'));
@@ -25,11 +26,14 @@ class Reviews
         remove_filter('the_content', 'wpautop');
     }
 
+    //add setting options fields
     function settings()
     {
+        //add two sections
         add_settings_section('labels_first_section', 'Table Header Settings', null, 'toplist-reviews-page');
         add_settings_section('labels_second_section', 'Other Labels', null, 'toplist-reviews-page');
 
+        //register Table Header Label fields
         add_settings_field('casino_label', 'Casino Label', array($this, 'casinoLabel'), 'toplist-reviews-page', 'labels_first_section');
         register_setting('toplistreviewsplugin', 'casino_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
 
@@ -42,9 +46,11 @@ class Reviews
         add_settings_field('play_label', 'Play Label', array($this, 'playLabel'), 'toplist-reviews-page', 'labels_first_section');
         register_setting('toplistreviewsplugin', 'play_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
 
+        //register Color Picker field to dynamically choose the table header background color
         add_settings_field('table_header_bg_color', 'Table Header Background Color', array($this, 'thBgColor'), 'toplist-reviews-page', 'labels_first_section');
         register_setting('toplistreviewsplugin', 'table_header_bg_color', array('sanitize_callback' => 'sanitize_text_field', 'default' => '#d29f36'));
 
+        //register other label fields
         add_settings_field('review_label', 'Review Label', array($this, 'reviewLabel'), 'toplist-reviews-page', 'labels_second_section');
         register_setting('otherLabels', 'review_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
 
@@ -52,6 +58,7 @@ class Reviews
         register_setting('otherLabels', 'play_button_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
     }
 
+    //show the input for Casino Table Header
     function casinoLabel()
     {
         ?>
@@ -60,6 +67,7 @@ class Reviews
         <?php
     }
 
+    //show the input field for Bonus Table Header
     function bonusLabel()
     {
         ?>
@@ -68,6 +76,7 @@ class Reviews
         <?php
     }
 
+    //show the input field for Features Table Header
     function featuresLabel()
     {
         ?>
@@ -76,6 +85,7 @@ class Reviews
         <?php
     }
 
+    //show the input field for Play Table Header
     function playLabel()
     {
         ?>
@@ -84,6 +94,7 @@ class Reviews
         <?php
     }
 
+    //show the input field for the Play Button label
     function playButtonLabel()
     {
         ?>
@@ -92,6 +103,7 @@ class Reviews
         <?php
     }
 
+//show input field for the review label
     function reviewLabel()
     {
         ?>
@@ -100,7 +112,7 @@ class Reviews
         <?php
     }
 
-
+//show the Color Picker field
     function thBgColor()
     {
         ?>
@@ -109,14 +121,17 @@ class Reviews
         <?php
     }
 
+    //register admin page in the dashboard menu
     function adminPage()
     {
         add_options_page('Toplist Reviews App Labels', 'Toplist Reviews App', 'manage_options', 'toplist-reviews-page', array($this, 'ourHtml'));
 
     }
 
+    //render settings fields HTML
     function ourHtml()
     {
+        //check if current logged in user has administrator privileges
         if (!current_user_can('manage_options')) {
             return;
         }
@@ -138,6 +153,7 @@ class Reviews
         <?php
     }
 
+    //include css and js assets
     function pluginAssets()
     {
         wp_enqueue_style('bootstrap-file', plugin_dir_url(__FILE__) . 'assets/css/bootstrap.min.css');
@@ -146,12 +162,15 @@ class Reviews
 
     }
 
+    //include wordpress colorpicker scripts
+
     function pluginSettingPageColorPicker()
     {
         wp_enqueue_style('wp-color-picker');
         wp_enqueue_script('main-script', plugins_url('assets/js/main.js', __FILE__), array('wp-color-picker'), false, true);
     }
 
+    //callback function for the content filter hook that will render the table
     function showReviewsHtml($content)
     {
         return generateReviewsHTML();
