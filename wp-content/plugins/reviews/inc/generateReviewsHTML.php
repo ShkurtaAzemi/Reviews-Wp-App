@@ -81,7 +81,9 @@ function generateReviewsHTML()
                                 <td data-title="Casino">
                                     <div class="cell-row-content casino-row">
                                         <?php if ($logo_url): ?>
-                                            <img src="<?php echo esc_url($logo_url) ?>" alt="">
+                                            <a href="<?php echo esc_url($review_url) ?: '#' ?>">
+                                                <img src="<?php echo esc_url($logo_url) ?>" alt="">
+                                            </a>
                                         <?php endif;
                                         if ($review_url):
                                             ?>
@@ -90,7 +92,6 @@ function generateReviewsHTML()
                                     </div>
                                 </td>
                                 <td data-title="Bonus">
-
                                     <div class=" cell-row-content star-rating">
                                         <?php if ($rating): ?>
                                             <svg style="width: 0; height: 0;display: none"
