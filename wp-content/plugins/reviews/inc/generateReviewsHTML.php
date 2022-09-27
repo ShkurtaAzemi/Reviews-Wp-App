@@ -1,8 +1,5 @@
 <?php
-function comparator($object1, $object2)
-{
-    return $object1->score > $object2->score;
-}
+
 
 function generateReviewsHTML()
 {
@@ -27,9 +24,9 @@ function generateReviewsHTML()
                 usort($our_toplists, function ($toplist1, $toplist2) {
                     return $toplist1->position <=> $toplist2->position;
                 });
-//                echo "<pre>";
-//                print_r($our_toplists);
-//                echo "</pre>";
+                echo "<pre>";
+                print_r($our_toplists);
+                echo "</pre>";
 
             }
 
@@ -38,224 +35,92 @@ function generateReviewsHTML()
     }
 
 
-    ob_start(); ?>
-    <section class="section-content-wrapper">
-        <div class="container table-container">
-            <div class="table-header">
-                <div class="table-cell cell-header  col-lg-3 col-sm-6">Casino</div>
-                <div class="table-cell cell-header  col-lg-3 col-sm-6">Bonus</div>
-                <div class="table-cell cell-header  col-lg-3 col-sm-6">Features</div>
-                <div class="table-cell cell-header  col-lg-3 col-sm-6">Play</div>
-            </div>
-            <div class="table-row ">
-                <div class="cell-row-content col-md-3 casino-row">
-                    <img src="https://picsum.photos/195/75" alt="">
-                    <a href="#">Review</a>
-                </div>
-                <div class="cell-row-content col-md-3">
-                    <div class="star-rating">
+    if (!empty($our_toplists)):
+        ob_start(); ?>
+        <section class="section-content-wrapper">
+            <div class="container table-container">
+                <div class="table-responsive" id="no-more-tables">
+                    <table class="table table-borderless align-middle">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="table-cell cell-header">Casino</th>
+                            <th scope="col" class="table-cell cell-header">Bonus</th>
+                            <th scope="col" class="table-cell cell-header">Features</th>
+                            <th scope="col" class="table-cell cell-header">Play</th>
+                        </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        <?php foreach ($our_toplists as $toplist):
 
-                        <svg style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                            <defs>
-                                <mask id="half">
-                                    <rect x="0" y="0" width="32" height="32" fill="white"/>
-                                    <rect x="50%" y="0" width="32" height="32" fill="grey"/>
-                                </mask>
+                            $logo_url = $toplist->logo;
+                            $review_url = get_site_url() . '/' . $toplist->brand_id;
+                            $rating = $toplist->info->rating;
+                            $bonus = $toplist->info->bonus;
+                            $features_array = $toplist->info->features;
+                            $terms_and_conditions = $toplist->terms_and_conditions;
+                            $play_url = $toplist->play_url;
 
-                                <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="star">
-                                    <path d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z"/>
-                                </symbol>
-                            </defs>
-                        </svg>
-                        <p class="c-rate">
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                        </p>
-                    </div>
-                    <p class="bonus-text">Lorem Ipsum</p>
-                </div>
-                <div class="cell-row-content col-md-3 features-row">
-                    <ul>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolor</li>
-                        <li>Sit</li>
-                    </ul>
-                </div>
-                <div class="cell-row-content col-md-3 play-row">
-                    <a href="#"><span class="play-btn">  Play Now</span></a>
-                    <p class="terms-conditions">21+ | <a href=\"https://generator.lorem-ipsum.info/terms-and-conditions\">T&CS Apply</a> | Gamble Responsibly</p>
-                </div>
-            </div>
-            <div class="table-row ">
-                <div class="cell-row-content col-md-3 casino-row">
-                    <img src="https://picsum.photos/195/75" alt="">
-                    <a href="#">Review</a>
-                </div>
-                <div class="cell-row-content col-md-3">
-                    <div class="star-rating">
+                            ?>
+                            <tr class="table-row">
+                                <td data-title="Casino">
+                                    <div class="cell-row-content casino-row">
+                                        <img src="<?php echo esc_url($logo_url) ?>" alt="">
+                                        <a href="<?php echo esc_url($review_url) ?>"><?php _e('Review', 'reviews-app') ?></a>
+                                    </div>
+                                </td>
+                                <td data-title="Bonus">
 
-                        <svg style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                            <defs>
-                                <mask id="half">
-                                    <rect x="0" y="0" width="32" height="32" fill="white"/>
-                                    <rect x="50%" y="0" width="32" height="32" fill="grey"/>
-                                </mask>
+                                    <div class=" cell-row-content star-rating">
+                                        <svg style="width: 0; height: 0;display: none" xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 32 32">
+                                            <defs>
+                                                <mask id="half">
+                                                    <rect x="0" y="0" width="32" height="32" fill="white"/>
+                                                    <rect x="50%" y="0" width="32" height="32" fill="grey"/>
+                                                </mask>
 
-                                <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="star">
-                                    <path d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z"/>
-                                </symbol>
-                            </defs>
-                        </svg>
-                        <p class="c-rate">
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                        </p>
-                    </div>
-                    <p class="bonus-text">Lorem Ipsum</p>
-                </div>
-                <div class="cell-row-content col-md-3 features-row">
-                    <ul>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolor</li>
-                        <li>Sit</li>
-                    </ul>
-                </div>
-                <div class="cell-row-content col-md-3 play-row">
-                    <a href="#"><span class="play-btn">  Play Now</span></a>
-                    <p class="terms-conditions">21+ | <a href=\"https://generator.lorem-ipsum.info/terms-and-conditions\">T&CS Apply</a> | Gamble Responsibly</p>
+                                                <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
+                                                        id="star">
+                                                    <path d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z"/>
+                                                </symbol>
+                                            </defs>
+                                        </svg>
+                                        <p class="c-rate">
+                                            <?php for ($i = 0; $i <= 5; $i++): ?>
+                                                <svg class="c-icon <?php echo $i <= $rating ? 'active' : '' ?>"
+                                                     width="32" height="32">
+                                                    <use href="#star"></use>
+                                                </svg>
+                                            <?php endfor; ?>
+                                        </p>
+
+                                        <p class="bonus-text"><?php echo $bonus ?></p>
+                                    </div>
+                                </td>
+                                <td data-title="Features">
+                                    <div class="cell-row-content features-row">
+                                        <ul>
+                                            <?php foreach ($features_array as $feature): ?>
+                                                <li><?php echo $feature ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td data-title="Play">
+                                    <div class="cell-row-content play-row">
+                                        <a href="<?php echo esc_url($play_url) ?>"><span
+                                                    class="play-btn">  Play Now</span></a>
+                                        <p class="terms-conditions"><?php echo $terms_and_conditions ?></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="table-row ">
-                <div class="cell-row-content col-md-3 casino-row">
-                    <img src="https://picsum.photos/195/75" alt="">
-                    <a href="#">Review</a>
-                </div>
-                <div class="cell-row-content col-md-3">
-                    <div class="star-rating">
-
-                        <svg style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                            <defs>
-                                <mask id="half">
-                                    <rect x="0" y="0" width="32" height="32" fill="white"/>
-                                    <rect x="50%" y="0" width="32" height="32" fill="grey"/>
-                                </mask>
-
-                                <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="star">
-                                    <path d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z"/>
-                                </symbol>
-                            </defs>
-                        </svg>
-                        <p class="c-rate">
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                        </p>
-                    </div>
-                    <p class="bonus-text">Lorem Ipsum</p>
-                </div>
-                <div class="cell-row-content col-md-3 features-row">
-                    <ul>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolor</li>
-                        <li>Sit</li>
-                    </ul>
-                </div>
-                <div class="cell-row-content col-md-3 play-row">
-                    <a href="#"><span class="play-btn">  Play Now</span></a>
-                    <p class="terms-conditions">21+ | <a href=\"https://generator.lorem-ipsum.info/terms-and-conditions\">T&CS Apply</a> | Gamble Responsibly</p>
-                </div>
-            </div>
-            <div class="table-row ">
-                <div class="cell-row-content col-md-3 casino-row">
-                    <img src="https://picsum.photos/195/75" alt="">
-                    <a href="#">Review</a>
-                </div>
-                <div class="cell-row-content col-md-3">
-                    <div class="star-rating">
-
-                        <svg style="width: 0; height: 0;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                            <defs>
-                                <mask id="half">
-                                    <rect x="0" y="0" width="32" height="32" fill="white"/>
-                                    <rect x="50%" y="0" width="32" height="32" fill="grey"/>
-                                </mask>
-
-                                <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="star">
-                                    <path d="M31.547 12a.848.848 0 00-.677-.577l-9.427-1.376-4.224-8.532a.847.847 0 00-1.516 0l-4.218 8.534-9.427 1.355a.847.847 0 00-.467 1.467l6.823 6.664-1.612 9.375a.847.847 0 001.23.893l8.428-4.434 8.432 4.432a.847.847 0 001.229-.894l-1.615-9.373 6.822-6.665a.845.845 0 00.214-.869z"/>
-                                </symbol>
-                            </defs>
-                        </svg>
-                        <p class="c-rate">
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon active" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                            <svg class="c-icon" width="32" height="32">
-                                <use href="#star"></use>
-                            </svg>
-                        </p>
-                    </div>
-                    <p class="bonus-text">Lorem Ipsum</p>
-                </div>
-                <div class="cell-row-content col-md-3 features-row">
-                    <ul>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolor</li>
-                        <li>Sit</li>
-                    </ul>
-                </div>
-                <div class="cell-row-content col-md-3 play-row">
-                    <a href="#"><span class="play-btn">  Play Now</span></a>
-                    <p class="terms-conditions">21+ | <a href=\"https://generator.lorem-ipsum.info/terms-and-conditions\">T&CS Apply</a> | Gamble Responsibly</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <?php return ob_get_clean();
+        </section>
+        <?php
+        return ob_get_clean();
+    endif;
 }
