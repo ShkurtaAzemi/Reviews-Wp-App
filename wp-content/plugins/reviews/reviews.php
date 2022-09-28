@@ -22,7 +22,7 @@ class Reviews
         //register hooks and filters that are needed for the plugin
         add_action('admin_menu', array($this, 'adminPage'));
         add_action('admin_init', array($this, 'settings'));
-        add_action('init', array($this, 'pluginAssets'));
+        add_action('wp_enqueue_scripts', array($this, 'pluginAssets'));
         add_action('admin_enqueue_scripts', array($this, 'pluginSettingPageColorPicker'));
         add_filter('the_content', array($this, 'showReviewsHtml'), 1);
         remove_filter('the_content', 'wpautop');
