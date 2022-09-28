@@ -52,10 +52,10 @@ class Reviews
 
         //register other label fields
         add_settings_field('review_label', 'Review Label', array($this, 'reviewLabel'), 'toplist-reviews-page', 'labels_second_section');
-        register_setting('otherLabels', 'review_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+        register_setting('toplistreviewsplugin', 'review_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
 
         add_settings_field('play_button_label', 'Play Button Label', array($this, 'playButtonLabel'), 'toplist-reviews-page', 'labels_second_section');
-        register_setting('otherLabels', 'play_button_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
+        register_setting('toplistreviewsplugin', 'play_button_label', array('sanitize_callback' => 'sanitize_text_field', 'default' => ''));
     }
 
     //show the input for Casino Table Header
@@ -142,7 +142,6 @@ class Reviews
                 <form action="options.php" method="post">
                     <?php
                     settings_fields('toplistreviewsplugin');
-                    settings_fields('otherLabels');
                     do_settings_sections('toplist-reviews-page');
                     submit_button();
                     ?>
