@@ -1,11 +1,13 @@
 <?php
 
 /*
-  Plugin Name: Reviews
-  Description: A plugin that shows toplist reviews on the front-page of your theme.
-  Version: 1.0
-  Author: Shkurte Azemi
-  Text Domain: reviews-app
+    Plugin Name: Reviews
+    Description: A plugin that shows toplist reviews on the front-page of your theme.
+    Version: 1.0
+    Author: Shkurte Azemi
+    Text Domain: reviews-app
+    License: GPL v2 or later
+    License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
