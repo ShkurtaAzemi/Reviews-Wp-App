@@ -46,7 +46,7 @@
 
     #no-more-tables td:before {
         /* Now like a table header */
-        color: white;
+        color: #4b4b4b;
         position: absolute;
         /* Top/left values mimic padding */
         top: 40%;
