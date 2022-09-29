@@ -109,7 +109,7 @@ function generateReviewsHTML()
                                             </svg>
                                             <p class="c-rate">
                                                 <!--dynamic generation of svg star icons based on rating-->
-                                                <?php for ($i = 0; $i < 5; $i++): ?>
+                                                <?php for ($i = 1; $i <= 5; $i++): ?>
                                                     <svg class="c-icon <?php echo $i <= $rating ? 'active' : '' ?>"
                                                          width="32" height="32">
                                                         <use href="#star"></use>

@@ -24,9 +24,146 @@ h2{
 }
 
 .table-cell {
-    /*background: #d29f36;*/
     background:var(--th-bg-color);
+    color: #4b4b4b;
+    border-color: #1565C0;
+}
+
+.table-row {
+    padding: 30px 0px;
+}
+
+.table-row:not(:last-child) {
+    border-bottom: solid 1px #9d9091;
+}
+
+.table td {
+    padding: 30px 15px;
+}
+
+.table-cell {
+    width: calc(100% / 4);
+    text-align: center;
+    padding: 0.5em 0.5em;
+}
+
+.features-row {
+    justify-content: center;
+}
+
+.table-row .play-row {
+    text-align: center;
+    align-items: center;
+}
+
+.table-row .play-row a {
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
+
+.table-row .cell-row-content.casino-row {
+    text-align: center;
+}
+
+.table-row .cell-row-content.casino-row img {
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.table-row .cell-row-content.casino-row a {
+    margin-top: 10px;
+    text-decoration: underline;
+    color: #6b86a0;
+}
+
+.table-row .star-rating {
+    text-align: center;
+}
+
+.table-row .bonus-text {
+    text-align: center;
+}
+
+.table-row .cell-row-content .play-btn {
     color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    background: #0e6d2b;
+    text-decoration: underline;
+    text-transform: uppercase;
+    border-radius: 10px;
+    font-size: 19px;
+    text-align: center;
+}
+
+.table-row .cell-row-content ul {
+    padding: 0px 45px;
+}
+
+.table-row .cell-row-content ul li {
+    list-style-type: none;
+    position: relative;
+    width: max-content;
+}
+
+.table-row .cell-row-content ul li:before {
+    content: '';
+    background: url("../images/checkmark.svg") no-repeat;
+    position: absolute;
+    right: 24px;
+    top: 3px;
+    width: 100%;
+    height: 20px;
+}
+
+.table-row .cell-row-content .terms-conditions {
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.table-row .cell-row-content .terms-conditions a {
+    color: #c12921;
+}
+
+.c-icon {
+    --star-active: #fece3c;
+    --star-inactive: #6c6962;
+    fill: var(--star-inactive);
+}
+
+.c-icon.active {
+    fill: var(--star-active);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+}
+h2{
+    font-size: 25px;
+}
+
+.section-content-wrapper{
+    overflow: hidden;
+}
+.table-container {
+    display: block;
+    margin: 2em auto;
+    padding: 0;
+    box-shadow: 1px 8px 20px 0px rgb(0 0 0 / 65%);
+}
+
+.table-header {
+    flex-flow: row wrap;
+}
+
+.table-cell {
+    background:var(--th-bg-color);
+    color: #4b4b4b;
     border-color: #1565C0;
 }
 

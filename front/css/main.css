@@ -24,9 +24,8 @@ h2{
 }
 
 .table-cell {
-    /*background: #d29f36;*/
     background:var(--th-bg-color);
-    color: white;
+    color: #4b4b4b;
     border-color: #1565C0;
 }
 
