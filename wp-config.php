@@ -15,7 +15,7 @@
  */
 
 // ** Heroku Postgres settings - from Heroku Environment ** //
-$db = parse_url($_ENV["DATABASE_URL"]);
+$db = parse_url($_ENV["JAWSDB_MARIA_URL"]);
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
@@ -39,17 +39,20 @@ define('DB_COLLATE', '');
 /**#@+
  * Authentication Unique Keys and Salts.
  *
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         '0qJDlmy&+dD`K;Z}<=yZ8Z9rJbz[fTD|EIf7oJ[q&|QUm`39RHc@XpET&)*q8G_M');
-define('SECURE_AUTH_KEY',  'gN&|6V9+rnC$v}x|,s8zAQ#r9!tSk+pxmjB77^u92iZQHAZuHXyjx|Ro`Wi,_*)g');
-define('LOGGED_IN_KEY',    'uktyN_0_-G+|]S QHPB2B-Ba+ 1k^,CJMIE4Q$|@:#OHXSL)L.gDq|V(!&b1bxGn');
-define('NONCE_KEY',        'oN`uL+~|H9({vwmdL!Lk|>e5n)Ytn+^};B1*zFeG_kk-ULfjX>m/veB><7u)|-yv');
-define('AUTH_SALT',        'M2cc,6|.1rXUI9>dg}C-Ck5<Zv0c^},MlzK96v=u6I`=7%FMK1+Q|H)ysdmA)SF5');
-define('SECURE_AUTH_SALT', 'Dukk.-f(=M[po&w/:hF_c--$,hYjlC5/t|]=C?{yR*2Pgl#Qr;)yVr]r/d&s=j*}');
-define('LOGGED_IN_SALT',   '</Wr}i|>cR)K~QgYA,|KvjLH8a:pK g4%8})P[WHm+9{P`y/pzN2xPdYA6vUmi3a');
-define('NONCE_SALT',       '_gaPPktbFT(GT65<A<rrqEj,y^P4pA$tf01;a2p|)i(!ROK:n70iax~>S(9(+zX*');
+define('AUTH_KEY',         '%N8-Hqo,L&Zaf7lX7,~nTr}Z$ap%uSC7-/&9.U ?B4p?.bv(uN8>e-Kk A&=$e8j');
+define('SECURE_AUTH_KEY',  ',gjg.YyHKPppK^Wy)N*xDv*HU}@^pB4D+]& gyHGH9YBU[o:i]In`ZUrzbDH--JK');
+define('LOGGED_IN_KEY',    '_NBc5A+wd;1G,}N^)Adz?H-|0TzF[Yy6:Ab1j!@.>]SEC<7_}Bn1>T>SS09v6&1M');
+define('NONCE_KEY',        'ZPqKQ.:l|5V0GH.Y-@V3t$M-?=[+WfWJb3]*Z-.*qqK9A/KcGXS*{-F<jWBzK7SK');
+define('AUTH_SALT',        ':NM@<5W9;tR9R!4N!ak C{@O*W|u2BxW3n;o?vrUaQdB&Ji|t35=rxx)1dOG<j>&');
+define('SECURE_AUTH_SALT', 'un*R|+|v$KyP[zp&1pc($_tbcy]R~@kgqn^2-!P|-|.:t}-<w_waCiP[;Cuf5<fV');
+define('LOGGED_IN_SALT',   'hbKH+1Z+]Z5r%7R*va6;>&<bd#uyz,itBm= Ru #E} -QCU5X?<vg3&!g0kP- M}');
+define('NONCE_SALT',       '.%LSXHn/<9c(u_,-c 18<Qno-;g^-&,%I],n}}fNGs2`m!R1j~>gV0KIHta4IcIj');
 
 /**#@-*/
 
