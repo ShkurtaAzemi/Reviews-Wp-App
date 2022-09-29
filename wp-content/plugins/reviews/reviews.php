@@ -14,6 +14,41 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
 require_once plugin_dir_path(__FILE__) . 'inc/generateReviewsHTML.php';
 
+function reviews_plugin_activate()
+{
+
+    if (!get_option('casino_label')) {
+        add_option('casino_label', 'Casino');
+    }
+
+    if (!get_option('bonus_label')) {
+        add_option('bonus_label', 'Bonus');
+    }
+
+    if (!get_option('features_label')) {
+        add_option('features_label', 'Features');
+    }
+
+    if (!get_option('play_label')) {
+        add_option('play_label', 'Play');
+    }
+
+    if (!get_option('table_header_bg_color')) {
+        add_option('table_header_bg_color', '#d29f36');
+    }
+
+    if (!get_option('review_label')) {
+        add_option('review_label', 'Review');
+    }
+
+    if (!get_option('play_button_label')) {
+        add_option('play_button_label', 'Play Now');
+    }
+
+}
+
+register_activation_hook(__FILE__, 'reviews_plugin_activate');
+
 class Reviews
 {
 
@@ -27,6 +62,7 @@ class Reviews
         add_filter('the_content', array($this, 'showReviewsHtml'), 1);
         remove_filter('the_content', 'wpautop');
     }
+
 
     //add setting options fields
     function settings()
